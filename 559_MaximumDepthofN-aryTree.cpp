@@ -14,6 +14,7 @@ public:
 class Solution {
 public:
 
+    //dfs
     int maxDepth(Node* root) {
         if (root == NULL) {
             return 0;
@@ -24,5 +25,27 @@ public:
             max = std::max(max, maxDepth(child));
         }
         return max+1;
+    }
+
+    //bfs
+    int maxDepth(Node* root) {
+        int depth = 0;
+        if(root == NULL) {
+            return depth;
+        }
+        queue<Node *> q;
+        q.push(root);
+        while(!q.empty()) {
+            depth++;
+            int size = q.size();
+            for(int i = 0; i < size; i++) {
+                Node *node = q.front();
+                q.pop();
+                for(int j = 0; j < node->children.size(); j++) {
+                    q.push(node->children[j]);
+                }
+            }
+        }
+        return depth;
     }
 };
